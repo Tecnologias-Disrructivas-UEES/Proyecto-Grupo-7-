@@ -1,1 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visor de Epitelios – UEES</title>
+
+<style>
+    body {
+        margin: 0;
+        display: flex;
+        height: 100vh;
+        background: #7A0F2E; 
+        font-family: Arial, sans-serif;
+        color: #F5F5F5;
+    }
+
+    .container {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .thumbnails {
+        width: 210px;
+        background: #5e0b23;
+        overflow-y: auto;
+        padding: 15px;
+        box-shadow: inset -5px 0 10px rgba(0,0,0,0.4);
+    }
+
+    .thumb {
+        width: 100%;
+        margin-bottom: 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: transform .15s, border .15s;
+        border: 3px solid transparent;
+    }
+
+    .thumb:hover {
+        transform: scale(1.03);
+        border: 3px solid #FFD700; 
+    }
+
+    .viewer {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    #mainImage {
+        max-width: 85%;
+        max-height: 70vh;
+        border-radius: 8px;
+        border: 4px solid #F5F5F5;
+        background: white;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    #descripcion {
+        margin-top: 10px;
+        background: #ffffffdd;
+        color: #333;
+        padding: 14px 25px;
+        border-radius: 8px;
+        max-width: 80%;
+        font-size: 17px;
+        text-align: center;
+    }
+
+    .links {
+        margin-top: 12px;
+    }
+
+    .links a {
+        color: #FFD700;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .links a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="thumbnails" id="thumbnails"></div>
+
+    <div class="viewer">
+        <img id="mainImage" src="">
+        <div id="descripcion">Selecciona una imagen para visualizarla.</div>
+
+        <div class="links">
+            <a href="epitelio1.html">Volver a la bandeja</a>
+            <a href="index.html">Menú principal</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+const descripciones = [
+    "ÓRGANO: Útero (cuello) (humano). TÉCNICA: Hematoxilina-Eosina (H/E).",
+    "(4X). En la imagen pueden observarse numerosas cavidades irregulares que corresponden a luces vasculares. Se trata de vasos de pequeño calibre, tanto arterias (A, las de pared más gruesa y visible) como venas (V, las de pared más delgada y menos evidente). Todas estas cavidades están tapizadas internamente por un epitelio plano simple (una única hilera de células planas), llamado ''endotelio''. Este nombre se utiliza para designar al epitelio plano simple que reviste el interior de todo el aparato circulatorio.",
+    "(10X). Luces vasculares correspondientes a vasos (V) de pequeño calibre. A este aumento es ya visible el revestimiento endotelial. Obsérvese además la presencia de elementos formes sanguíneos (S) en el interior de los vasos.",
+    "(40X). Al microscopio óptico el endotelio (flecha) aparece, sobre todo cuando el vaso sanguíneo (V) está seccionado en sentido longitudinal, como una serie de núcleos alargados y aplanados, más o menos equidistantes entre sí, que apenas hacen prominencia hacia la luz vascular.",
+    "ÓRGANO: Riñón. (Fijado por perfusión). TÉCNICA: Hematoxilina-Eosina (H/E).",
+    "(4X). Múltiples glomérulos renales (puntas de flecha) en la cortical del riñón. Los espacios que hay entre los glomérulos están ocupados por distintas estructuras tubulares renales en diferentes planos de corte.",
+    "(10X). Los glomérulos están constituidos por un penacho vascular (punta de flecha) que aparece en el interior de una cavidad ('cámara nefrógena', 'cámara de Bowman', 'espacio urinífero' o 'espacio de Bowman') (B) revestida en la zona periférica por un epitelio plano simple. Entre los glomérulos hay gran cantidad de túbulos renales (T) seccionados longitudinal, transversal u oblicuamente.",
+    "(40X). Epitelio plano simple de la hoja parietal de la cápsula de Bowman. Los núcleos (puntas de flecha) de esas células epiteliales hacen relieve hacia la luz glomerular (cámara de Bowman) (B).",
+    "ÓRGANO: Meso intestinal. TÉCNICA: Hematoxilina-Eosina (H/E).",
+    "(4X). Sección transversal de un meso intestinal. Se trata de una estructura aplanada constituida por un tejido conjuntivo con abundantes vasos (V) (sanguíneos y linfáticos) y paquetes de miocitos lisos (Mi), tapizada a ambos lados por un epitelio plano simple, aquí denominado “mesotelio”. El mesotelio es el epitelio plano simple que reviste las cavidades serosas del organismo: pleural, pericárdica y peritoneal (como el presente caso).",
+    "(10X). El mesotelio (flechas) es un epitelio plano simple que tapiza las cavidades serosas del organismo. Está constituido por una única hilera de células planas en las que, al ser ligeramente más altas que las de un endotelio, el núcleo tiene más espacio citoplasmático para situarse y no se ve obligado a hacer prominencia hacia la correspondiente cavidad. Bajo las células mesoteliales se observa un tejido conjuntivo (C). (Miocitos lisos: Mi. Vasos: V).",
+    "(40X). Células mesoteliales planas (flechas). Están tapizando la superficie del meso intestinal. Dado que el grosor de estas células es ligeramente mayor que el de las células endoteliales, sus núcleos prácticamente no hacen relieve. (Tejido conjuntivo: C. Vaso sanguíneo: V. Vaso linfático: L. Miocitos lisos: Mi).",
+    "ÓRGANO: Riñón. (Fijado por perfusión). TÉCNICA: Hematoxilina-Eosina (H/E).",
+    "(4X). La mayoría de los túbulos renales están revestidos por un epitelio cúbico simple. Vamos a centrarnos en observar los túbulos localizados en la cortical renal, los cuales ocupan los espacios situados entre los glomérulos (puntas de flecha). Estos túbulos (T) aparecen seccionados de todas las maneras posibles, es decir, longitudinal, transversal y oblicuamente.",
+    "(10X). Túbulos (T) y glomérulos (G) en la corteza renal. Puede observarse cómo el epitelio de los túbulos delimita la luz tubular.",
+    "(40x). Los túbulos están tapizados por un epitelio cúbico simple (una única hilera de células cúbicas). A este aumento ya es posible comprobar que el epitelio de la mayoría de los túbulos posee una especialización del polo apical de las células denominada 'ribete en cepillo', que se orienta hacia la luz tubular (se trata entonces de 'túbulos proximales', Tp), mientras que el epitelio de otros túbulos no lo presenta (son los 'túbulos distales', Td).",
+    "ÓRGANO: Riñón. (Fijado por perfusión). TÉCNICA: Ácido peryódico-Schiff (PAS) / Hematoxilina.",
+    "(4X). Glomérulos (G) y túbulos (T) renales. Se ha realizado la técnica del PAS (Ácido peryódico-Schiff), y se ha empleado hematoxilina como contraste nuclear.",
+    "(10X). Con la técnica histoquímica del PAS (Ácido peryódico-Schiff) se comprueba cómo el ribete en cepillo del epitelio cúbico simple presenta PAS positividad (color magenta/fucsia), debido a los hidratos de carbono del glucocálix de las microvellosidades que constituyen dicho ribete. Pueden observarse también túbulos (asteriscos) con un epitelio cúbico simple que carece de ribete.",
+    "(40X). Marcada PAS positividad del ribete en cepillo (R). Rodeando externamente a los túbulos es posible observar, además, una fina línea PAS positiva (punta de flecha), sobre la que se apoyan los polos basales de las células epiteliales. Se trata de la membrana basal del epitelio. Se aprecian también varios túbulos (asteriscos) tapizados por un epitelio cúbico simple sin ribete en cepillo.",
+    "ÓRGANO: Riñón. TÉCNICA: Hematoxilina-Eosina (H/E).",
+    "(4X). En la parte más profunda del riñón (medular o médula renal) hay unos tubos de gran calibre y luz amplia, los ''tubos (o conductos) colectores papilares o de Bellini'' (Tc), que son fácilmente visibles a bajos aumentos y están tapizados por un epitelio cúbico simple, con células relativamente altas. Por ello también se puede considerar a ese epitelio como prismático simple bajo.",
+    "(10X). Secciones transversales de múltiples tubos o conductos colectores papilares o de Bellini (Tc).",
+    "(40X). Epitelio cúbico simple alto (o prismático simple bajo) (E) de los tubos o conductos colectores papilares o de Bellini (Tc).",
+    "ÓRGANO: Vesícula biliar. TÉCNICA: Hematoxilina-Eosina (H/E).",
+    "(4X). Revistiendo la superficie interna de la vesícula biliar encontramos un epitelio prismático simple (E) (una única hilera de células prismáticas), que descansa sobre un tejido conjuntivo (C). Este epitelio de revestimiento, a bajos aumentos, destaca perfectamente como una banda más teñida orientada hacia la luz de la vesícula, situada en la parte superior de la imagen.",
+    "(10X). Las células de este epitelio (E) son altas y delgadas. Los núcleos (N) están desplazados hacia la región basal de la célula, adoptando una disposición en ''empalizada'', ya que están muy próximos entre sí y perfectamente alineados, colocados todos a la misma altura. En algunas zonas los núcleos parecen desordenarse, mostrando cierto aspecto de pseudoestratificación (asterisco). Esa imagen se ve cuando el epitelio se secciona oblicuamente, hecho frecuente dada la gran irregularidad de la superficie interna de la vesícula biliar.",
+    "(20X). En algunas zonas los núcleos (N) de las células epiteliales pierden su típica disposición en ''empalizada'' y se desordenan, mostrando un aspecto de pseudoestratificación (asterisco). Esa imagen se ve cuando el epitelio se secciona oblicuamente, hecho frecuente dada la gran irregularidad de la superficie interna de la vesícula biliar. Dicha irregularidad genera también profundas invaginaciones (I), causa de que en los cortes histológicos aparezcan a menudo cavidades tapizadas por epitelio prismático simple, aparentemente incluidas en el tejido conjuntivo.",
+    "ÓRGANO: Intestino delgado. TÉCNICA: Hematoxilina-Eosina (H/E).",
+    "(4X). Las vellosidades intestinales (V) son cilíndricas o algo aplanadas, con forma de dedo. Constan de un eje de tejido conjuntivo revestido externamente por un epitelio prismático simple con chapa estriada y células caliciformes.",
+    "(10X). Vellosidades intestinales (V) seccionadas longitudinalmente. Están revestidas por un epitelio prismático simple (E) con chapa estriada y células caliciformes.",
+    "(40x). En el epitelio prismático simple con chapa estriada y células caliciformes, los núcleos (N) son ovalados, están desplazados hacia el tercio basal de la célula y se colocan con su eje mayor perpendicular al plano de la membrana basal, adoptando una disposición en ''empalizada'', dado lo cerca que están unos de otros. Puede observarse también la chapa estriada (puntas de flecha) y alguna célula caliciforme.",
+    "ÓRGANO: Trompa uterina (trompa de Falopio) (humana). TÉCNICA: Hematoxilina-Eosina (H/E).",
+    "(4X). Los repliegues ramificados que se proyectan hacia la luz de la trompa están formados por un eje de tejido conjuntivo (C) tapizado por un epitelio prismático simple ciliado (flecha). (Tejido muscular liso: M. Luz de la trompa: L).",
+    "(10X). Repliegues de la pared de la trompa uterina. Están constituidos por un eje de tejido conjuntivo (C) tapizado por un epitelio prismático simple ciliado (flecha). Las hendiduras que aparecen en el seno del tejido conjuntivo que forma el eje de alguno de estos repliegues corresponden a vasos linfáticos (Li). (Tejido muscular liso: M. Luz de la trompa: L).",
+    "(40X). El epitelio prismático simple ciliado de la trompa está constituido por una única hilera de células prismáticas, no demasiado altas, con cilios (flecha azul) en su polo apical. Los núcleos son redondeados o ligeramente ovoideos. La línea más teñida que se ve en el borde de la región apical de las células ciliadas se debe a la hilera de corpúsculos basales (flecha roja) de los cilios. Hay también células secretoras (punta de flecha), que aparecen aisladas entre las células ciliadas o en grupos de dos o tres. Sus polos apicales, sin cilios, hacen una ligera prominencia hacia la luz de la trompa. (Eje conjuntivo: C)."
+];
+</script>
+
+<script>
+const thumbsContainer = document.getElementById("thumbnails");
+const mainImage = document.getElementById("mainImage");
+const descripcionBox = document.getElementById("descripcion");
+
+const total = 35;
+
+for (let i = 0; i <= total; i++) {
+    const num = String(i).padStart(3, '0');
+
+    const thumb = document.createElement("img");
+    thumb.src = `images/epitelio/v_p_${num}.jpg`;
+    thumb.className = "thumb";
+    thumb.onclick = () => showImage(num);
+
+    thumbsContainer.appendChild(thumb);
+}
+
+function showImage(num) {
+    mainImage.src = `images/epitelio/v_p_${num}.jpg`;
+    descripcionBox.textContent = descripciones[parseInt(num)];
+}
+    
+    showImage("028");
+</script>
+
+</body>
+</html>
+
+
 
