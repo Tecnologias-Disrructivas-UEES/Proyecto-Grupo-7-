@@ -1,52 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
+<meta charset="UTF-8">
+<title>Epitelio Simple – UEES</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Epitelios de Revestimiento – UEES</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+
     body {
         margin: 0;
-        background: #000000;
-        font-family: Arial, sans-serif;
-        color: white;
+        background: #F4F4F4;
+        font-family: 'Montserrat', sans-serif;
+        color: #333;
+    }
+
+    .uees-header {
+        width: 100%;
+        background-color: #8A1538;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        padding-left: 40px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+
+    .uees-header img {
+        height: 48px;
+    }
+
+    .page-title {
         text-align: center;
+        font-size: 26px;
+        margin-top: 35px;
+        margin-bottom: 20px;
+        color: #8A1538;
+        font-weight: 600;
     }
 
-    #texto-superior {
-        margin-top: 20px;
-        font-size: 18px;
+    .note {
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: #555;
     }
 
-    #volver {
-        color: #791632;
+    .image-box {
+        width: 92%;
+        max-width: 950px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 14px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .image-box img {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .volver {
+        display: block;
+        text-align: center;
+        margin: 35px 0;
         text-decoration: none;
+        color: #8A1538;
+        font-size: 18px;
+        font-weight: 600;
     }
 
-    img {
-        margin-top: 20px;
-        width: 90%;
-        max-width: 1125px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    .volver:hover {
+        text-decoration: underline;
     }
+
 </style>
-
 </head>
 
 <body>
 
-<div id="texto-superior">
-    - Para acceder a las imágenes, hacer clic en la preparación -  
-    <a id="volver" href="index.html">Volver al Menú principal</a>
+<div class="uees-header">
+    <img src="images/logo-uees.png" alt="UEES">
 </div>
 
-<!-- Bandeja -->
-<img src="bandeja01.jpg" width="1125" height="900" usemap="#image-map">
+<div class="page-title">Epitelio Simple</div>
 
-<!-- Mapa de zonas clickeables -->
+<div class="note">Para acceder a las imágenes, haga clic en la preparación</div>
+
+<div class="image-box">
+    <img src="files/bandeja01.jpg" usemap="#image-map">
+</div>
+
+<a class="volver" href="index.html">← Volver al Menú principal</a>
+
 <map name="image-map">
     <area alt="Epitelio plano simple (endotelio)" href="epsimple1.html" coords="53,194,136,455" shape="rect">
     <area alt="Epitelio plano simple" href="epsimple2.html" coords="157,194,241,453" shape="rect">
