@@ -10,19 +10,17 @@
         margin: 0;
         display: flex;
         height: 100vh;
-        background: #7A0F2E; /* Bordó UEES */
+        background: #7A0F2E; 
         font-family: Arial, sans-serif;
         color: #F5F5F5;
     }
 
-    /* CONTENEDOR PRINCIPAL */
     .container {
         display: flex;
         width: 100%;
         height: 100vh;
     }
 
-    /* COLUMNA IZQUIERDA (miniaturas) */
     .thumbnails {
         width: 210px;
         background: #5e0b23;
@@ -42,10 +40,9 @@
 
     .thumb:hover {
         transform: scale(1.03);
-        border: 3px solid #FFD700; /* dorado UEES */
+        border: 3px solid #FFD700; 
     }
 
-    /* VISOR PRINCIPAL */
     .viewer {
         flex: 1;
         display: flex;
@@ -76,7 +73,6 @@
         text-align: center;
     }
 
-    /* LINKS */
     .links {
         margin-top: 12px;
     }
@@ -100,10 +96,8 @@
 
 <div class="container">
 
-    <!-- MINIATURAS -->
     <div class="thumbnails" id="thumbnails"></div>
 
-    <!-- VISOR PRINCIPAL -->
     <div class="viewer">
         <img id="mainImage" src="">
         <div id="descripcion">Selecciona una imagen para visualizarla.</div>
@@ -116,13 +110,12 @@
 
 </div>
 
-<!-- LISTA DE DESCRIPCIONES -->
 <script>
 const descripciones = [
     "ÓRGANO: Útero (cuello) (humano). TÉCNICA: Hematoxilina-Eosina (H/E).",
-    "Descripción 001",
-    "Descripción 002",
-    "Descripción 003",
+    "(4X). En la imagen pueden observarse numerosas cavidades irregulares que corresponden a luces vasculares. Se trata de vasos de pequeño calibre, tanto arterias (A, las de pared más gruesa y visible) como venas (V, las de pared más delgada y menos evidente). Todas estas cavidades están tapizadas internamente por un epitelio plano simple (una única hilera de células planas), llamado ''endotelio''. Este nombre se utiliza para designar al epitelio plano simple que reviste el interior de todo el aparato circulatorio.",
+    "(10x). Luces vasculares correspondientes a vasos (V) de pequeño calibre. A este aumento es ya visible el revestimiento endotelial. Obsérvese además la presencia de elementos formes sanguíneos (S) en el interior de los vasos.",
+    "(40x). Al microscopio óptico el endotelio (flecha) aparece, sobre todo cuando el vaso sanguíneo (V) está seccionado en sentido longitudinal, como una serie de núcleos alargados y aplanados, más o menos equidistantes entre sí, que apenas hacen prominencia hacia la luz vascular.",
     "Descripción 004",
     "Descripción 005",
     "Descripción 006",
@@ -158,13 +151,12 @@ const descripciones = [
 ];
 </script>
 
-<!-- GENERADOR DE MINIATURAS + FUNCIÓN FINAL -->
 <script>
 const thumbsContainer = document.getElementById("thumbnails");
 const mainImage = document.getElementById("mainImage");
 const descripcionBox = document.getElementById("descripcion");
 
-const total = 35; // imágenes v_p_000 a v_p_035
+const total = 35;
 
 for (let i = 0; i <= total; i++) {
     const num = String(i).padStart(3, '0');
@@ -181,6 +173,8 @@ function showImage(num) {
     mainImage.src = `images/epitelio/v_p_${num}.jpg`;
     descripcionBox.textContent = descripciones[parseInt(num)];
 }
+    
+    showImage("000");
 </script>
 
 </body>
