@@ -10,18 +10,16 @@
         margin: 0;
         display: flex;
         height: 100vh;
-        background: #7A0F2E; /* bordó UEES */
+        background: #7A0F2E; 
         font-family: Arial, sans-serif;
         color: #F5F5F5;
     }
 
-    /* AREA GENERAL */
     .container {
         display: flex;
         width: 100%;
     }
 
-    /* MINIATURAS – CASCADA */
     .thumbnails {
         width: 190px;
         background: #5e0b23;
@@ -41,10 +39,9 @@
 
     .thumb:hover {
         transform: scale(1.03);
-        border: 3px solid #FFD700; /* dorado UEES */
+        border: 3px solid #FFD700; 
     }
 
-    /* VISOR PRINCIPAL */
     .viewer {
         flex: 1;
         display: flex;
@@ -73,7 +70,6 @@
         font-size: 17px;
     }
 
-    /* ENLACES */
     .links {
         margin-top: 15px;
     }
@@ -96,29 +92,26 @@
 
 <div class="container">
 
-    <!-- MINIATURAS -->
     <div class="thumbnails" id="thumbnails"></div>
 
-    <!-- VISOR PRINCIPAL -->
     <div class="viewer">
         <img id="mainImage" src="">
         <div id="desc">Selecciona una imagen para verla.</div>
 
         <div class="links">
             <a href="epitelio1.html">↩ Volver a la bandeja</a>
-            <a href="index.html"> Menú principal</a>
+            <a href="index.html">Menú principal</a>
         </div>
     </div>
 
 </div>
 
 <script>
-    const total = 35; // TÚ TIENES 36 imágenes 000–035
+    const total = 35;
     const thumbsContainer = document.getElementById("thumbnails");
     const mainImage = document.getElementById("mainImage");
     const desc = document.getElementById("desc");
 
-    // GENERAR MINIATURAS AUTOMÁTICAMENTE
     for (let i = 0; i <= total; i++) {
         const num = String(i).padStart(3, '0');
         const thumb = document.createElement("img");
@@ -131,7 +124,6 @@
     function showImage(num) {
         mainImage.src = `images/epitelio/v_p_${num}.jpg`;
 
-        // Puedes cambiar este texto si quieres descripciones reales
         desc.textContent = `Imagen ${num} — Epitelio de revestimiento (H/E).`;
     }
 </script>
