@@ -1,1 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Epitelios – Visor UEES</title>
+
+<style>
+    body {
+        margin: 0;
+        display: flex;
+        height: 100vh;
+        background: #7A0F2E; /* bordó UEES */
+        font-family: Arial, sans-serif;
+        color: #F5F5F5;
+    }
+
+    /* AREA GENERAL */
+    .container {
+        display: flex;
+        width: 100%;
+    }
+
+    /* MINIATURAS – CASCADA */
+    .thumbnails {
+        width: 190px;
+        background: #5e0b23;
+        overflow-y: auto;
+        padding: 15px 10px;
+        box-shadow: inset -5px 0 10px rgba(0,0,0,0.3);
+    }
+
+    .thumb {
+        width: 100%;
+        margin-bottom: 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: transform .2s, border .2s;
+        border: 3px solid transparent;
+    }
+
+    .thumb:hover {
+        transform: scale(1.03);
+        border: 3px solid #FFD700; /* dorado UEES */
+    }
+
+    /* VISOR PRINCIPAL */
+    .viewer {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    #mainImage {
+        max-width: 88%;
+        max-height: 70vh;
+        border-radius: 8px;
+        border: 5px solid #F5F5F5;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        background: white;
+    }
+
+    #desc {
+        margin-top: 15px;
+        padding: 12px 30px;
+        background: #ffffffcc;
+        color: #333;
+        border-radius: 6px;
+        max-width: 80%;
+        font-size: 17px;
+    }
+
+    /* ENLACES */
+    .links {
+        margin-top: 15px;
+    }
+
+    .links a {
+        color: #FFD700;
+        text-decoration: none;
+        font-size: 18px;
+        margin: 0 20px;
+        font-weight: bold;
+    }
+
+    .links a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- MINIATURAS -->
+    <div class="thumbnails" id="thumbnails"></div>
+
+    <!-- VISOR PRINCIPAL -->
+    <div class="viewer">
+        <img id="mainImage" src="">
+        <div id="desc">Selecciona una imagen para verla.</div>
+
+        <div class="links">
+            <a href="epitelio.html">↩ Volver a la bandeja</a>
+            <a href="index.html">🏠 Menú principal</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const total = 35; // TÚ TIENES 36 imágenes 000–035
+    const thumbsContainer = document.getElementById("thumbnails");
+    const mainImage = document.getElementById("mainImage");
+    const desc = document.getElementById("desc");
+
+    // GENERAR MINIATURAS AUTOMÁTICAMENTE
+    for (let i = 0; i <= total; i++) {
+        const num = String(i).padStart(3, '0');
+        const thumb = document.createElement("img");
+        thumb.src = `images/epitelio/v_p_${num}.jpg`;
+        thumb.className = "thumb";
+        thumb.onclick = () => showImage(num);
+        thumbsContainer.appendChild(thumb);
+    }
+
+    function showImage(num) {
+        mainImage.src = `images/epitelio/v_p_${num}.jpg`;
+
+        // Puedes cambiar este texto si quieres descripciones reales
+        desc.textContent = `Imagen ${num} — Epitelio de revestimiento (H/E).`;
+    }
+</script>
+
+</body>
+</html>
 
